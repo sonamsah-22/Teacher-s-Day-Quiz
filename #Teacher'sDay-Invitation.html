@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher's Day Quiz</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background: #e0f2ff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 { color: #333; }
+    .card {
+      background: #fffbea;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    button.option {
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 8px 0;
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: 0.2s;
+    }
+    button.option:hover:not(:disabled) {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+    button.option:disabled {
+      opacity: 0.8;
+      cursor: not-allowed;
+    }
+    button.nextBtn, button.startBtn {
+      margin-top: 15px;
+      background: #ffc107;
+      color: black;
+      font-weight: bold;
+      width: auto;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
+    }
+    .hidden { display: none; }
+    .celebration {
+      font-size: 28px;
+      font-weight: bold;
+      color: #d63384;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .correct { background-color: #28a745 !important; }
+    .wrong { background-color: #dc3545 !important; }
+    .fileLink {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 20px;
+      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+      color: black;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 10px;
+      box-shadow: 2px 4px 6px rgba(0,0,0,0.2);
+    }
+    .fileLink:hover {
+      background: linear-gradient(90deg, #fad0c4, #ff9a9e);
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Teacher's Day Fun Quiz 🎉</h1>
+  <h2 id="timer">⏱ Time: 0m 0s 0ms</h2>
+
+  <!-- Welcome Page -->
+  <div id="welcome" class="card">
+    <h2>✨ Ready for Quiz? ✨</h2>
+    <p>🏆 First <b>3 winners</b> will be given special prizes! 🏆</p>
+    <button class="startBtn" onclick="startQuiz()">Start Quiz ➡️</button>
+  </div>
+
+  <!-- Quiz 1 -->
+  <div id="quiz1" class="card hidden">
+    <h3>Q1. 🖥️ I have lots of keys, but I can’t open a single door. What am I?</h3>
+    <button class="option" data-correct="true">a) Keyboard</button>
+    <button class="option" data-correct="false">b) Lockscreen</button>
+    <button class="option" data-correct="false">c) Password</button>
+    <button class="option" data-correct="false">d) Piano</button>
+    <button id="next1" class="nextBtn" onclick="nextQuiz(1)" disabled>Next ➡️</button>
+  </div>
+
+  <!-- Quiz 2 -->
+  <div id="quiz2" class="card hidden">
+    <h3>Q2. 🐞 I’m a tiny creature that makes programmers panic at night. Who am I?</h3>
+    <button class="option" data-correct="false">a) Virus</button>
+    <button class="option" data-correct="true">b) Bug</button>
+    <button class="option" data-correct="false">c) Spider</button>
+    <button class="option" data-correct="false">d) Error</button>
+    <button id="next2" class="nextBtn" onclick="nextQuiz(2)" disabled>Next ➡️</button>
+  </div>
+
+  <!-- Quiz 3 -->
+  <div id="quiz3" class="card hidden">
+    <h3>Q3. ⚡ I can crash your system if I drink too much power. Who am I?</h3>
+    <button class="option" data-correct="false">a) Motherboard</button>
+    <button class="option" data-correct="false">b) CPU</button>
+    <button class="option" data-correct="true">c) RAM</button>
+    <button class="option" data-correct="false">d) Battery</button>
+    <button id="next3" class="nextBtn" onclick="nextQuiz(3)" disabled>Next ➡️</button>
+  </div>
+
+  <!-- Quiz 4 -->
+  <div id="quiz4" class="card hidden">
+    <h3>Q4. 🕸️ I’m everywhere, but you can’t clean me with a broom. Who am I?</h3>
+    <button class="option" data-correct="true">a) The Web</button>
+    <button class="option" data-correct="false">b) Cable</button>
+    <button class="option" data-correct="false">c) Router</button>
+    <button class="option" data-correct="false">d) Spider</button>
+    <button id="next4" class="nextBtn" onclick="nextQuiz(4)" disabled>Next ➡️</button>
+  </div>
+
+  <!-- Quiz 5 -->
+  <div id="quiz5" class="card hidden">
+    <h3>Q5. 📂 I live in your computer, but I wear no clothes. Who am I?</h3>
+    <button class="option" data-correct="false">a) Folder</button>
+    <button class="option" data-correct="false">b) Cache</button>
+    <button class="option" data-correct="true">c) File</button>
+    <button class="option" data-correct="false">d) Recycle Bin</button>
+    <button id="next5" class="nextBtn" onclick="nextQuiz(5)" disabled>Finish 🎉</button>
+  </div>
+
+  <!-- Invitation Section -->
+  <div id="invitation" class="card hidden">
+    <h2 class="celebration">🎊 Happy Teacher's Day 🎊</h2>
+    <p>✨ "Teachers plant the seeds of knowledge that grow forever." ✨</p>
+    <h3>Your Score: <span id="finalScore"></span> / 5</h3>
+    <h3>Time Taken: <span id="finalTime"></span></h3>
+    <hr>
+    
+    <!-- Added Invitation Text -->
+    <div style="margin-top:20px; text-align:center; font-size:18px; line-height:1.6;">
+      <p>🌸 <b>You’re Invited!</b> 🌸</p>
+      <p>Department of Computer Engineering<br>
+      Cordially invites you to celebrate <b>Teacher’s Day</b></p>
+      <p>📅 Date: <b>5th September 2025</b><br>
+      🕙 Time: <b>03:00 PM</b><br>
+      📍 Venue: <b>Seminar Hall</b></p>
+    </div>
+
+    <h3>📂 Your Special Gift</h3>
+    <a href="https://drive.google.com/file/d/1wozTGePGSTu84TK-Zw62oeksWh8mBOs1/view?usp=drive_link" target="_blank" class="fileLink">🎁 Open </a>
+  </div>
+
+
+  <script>
+    let score = 0;
+    let startTime, timerInterval;
+
+    function startQuiz(){
+      startTime = new Date(); // start timer
+      document.getElementById("welcome").classList.add("hidden");
+      document.getElementById("quiz1").classList.remove("hidden");
+
+      // start ticking every 100ms
+      timerInterval = setInterval(updateTimer, 100);
+    }
+
+    function updateTimer(){
+      let now = new Date();
+      let elapsed = now - startTime; // ms
+      let totalSeconds = Math.floor(elapsed / 1000);
+      let minutes = Math.floor(totalSeconds / 60);
+      let seconds = totalSeconds % 60;
+      let milliseconds = elapsed % 1000;
+
+      let timeText = `${minutes}m ${seconds}s ${milliseconds}ms`;
+      document.getElementById("timer").textContent = `⏱ Time: ${timeText}`;
+    }
+
+    // Answer button logic
+    document.querySelectorAll(".option").forEach(btn => {
+      btn.addEventListener("click", function(){
+        const options = this.parentNode.querySelectorAll(".option");
+        options.forEach(b => b.disabled = true); // disable all after one click
+
+        if(this.dataset.correct === "true"){
+          this.classList.add("correct");
+          score++;
+        } else {
+          this.classList.add("wrong");
+          options.forEach(b => {
+            if(b.dataset.correct === "true") b.classList.add("correct");
+          });
+        }
+
+        // enable next
+        this.parentNode.querySelector(".nextBtn").disabled = false;
+      });
+    });
+
+    function nextQuiz(qNo){
+      document.getElementById("quiz"+qNo).classList.add("hidden");
+      if(qNo < 5){
+        document.getElementById("quiz"+(qNo+1)).classList.remove("hidden");
+      } else {
+        clearInterval(timerInterval); // stop timer
+        let finalTime = document.getElementById("timer").textContent.replace("⏱ Time: ", "");
+        document.getElementById("invitation").classList.remove("hidden");
+        document.getElementById("finalScore").textContent = score;
+        document.getElementById("finalTime").textContent = finalTime;
+      }
+    }
+  </script>
+</body>
+</html>
